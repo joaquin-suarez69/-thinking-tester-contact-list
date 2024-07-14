@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/java/features"
         ,glue= {"steps"}
-        ,plugin = { "pretty", "html:target/cucumber-reports" }
+        ,plugin = { "pretty", "html:target/cucumber-report.html" }
         ,tags = ("@UpdateContact or @CreateContact")
         ,monochrome = true
 )

@@ -16,7 +16,6 @@ public class ManageContacts {
     StepDefinition stepDefinition = new StepDefinition();
     @Given("user {string} logs in the system")
     public void user_logs_in_the_system(String user) throws Throwable {
-
         BaseTest.logger.info("Given step user "+user);
         stepDefinition.login(new User("test@account.com","myPassword"));
     }
@@ -31,13 +30,15 @@ public class ManageContacts {
     @When("^user tries to update a contact$")
     public void user_tries_to_update_contact() throws Throwable {
         stepDefinition.updateContact(new Contact("test 4","test 4"), new Contact("test 5","test 5"));
-        assertTrue(stepDefinition.validateNewContactInList(new Contact("test 5","test 5")));
         BaseTest.logger.info("Update contact");
     }
 
-
-    @Then("^success message is displayed$")
-    public void success_message_is_displayed() throws Throwable {
-        BaseTest.logger.info("Then step");
+    @Then("^new contact is present on the contacts list$")
+    public void new_contact_present_on_list() throws Throwable {
+        assertTrue(stepDefinition.validateNewContactInList(new Contact("test 4","test 4")));
+    }
+    @Then("^updated contact on the contacts list$")
+    public void updated_contact_present_on_list() throws Throwable {
+        assertTrue(stepDefinition.validateNewContactInList(new Contact("test 5","test 5")));
     }
 }

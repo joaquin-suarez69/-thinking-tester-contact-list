@@ -9,14 +9,14 @@ Feature: Manage Contacts
 
       When user tries to create a contact
 
-      Then success message is displayed
+      Then new contact is present on the contacts list
 
     @UpdateContact
     Scenario: Update a contact
 
       When user tries to update a contact
 
-      Then success message is displayed
+      Then updated contact on the contacts list
 
     @DeleteContact
     Scenario: Delete a contact
