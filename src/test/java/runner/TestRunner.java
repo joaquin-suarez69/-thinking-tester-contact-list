@@ -8,8 +8,9 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/java/features"
         ,glue= {"steps"}
-        ,plugin = { "pretty", "html:target/htmlreports" }
-        ,tags = "@CreateContact"
+        ,plugin = { "pretty", "html:target/cucumber-reports" }
+        ,tags = ("@UpdateContact or @CreateContact")
+        ,monochrome = true
 )
 public class TestRunner {
 

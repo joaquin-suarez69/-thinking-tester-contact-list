@@ -1,5 +1,6 @@
 package pages;
 
+import models.Contact;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,13 +25,29 @@ public class ContactListPage extends BasePage {
     public Boolean findSpecificContact(String firstName, String lastName){
         boolean result = false;
         By xpathLocator = By.xpath("//*[text()='"+firstName+" "+lastName+"']");
+        wait.until(driver -> contactsTable.isDisplayed());
         List<WebElement> rows = contactsTable.findElements(By.className("contactTableBodyRow"));
         for(WebElement row : rows) {
             if (row.findElement(xpathLocator).isDisplayed()){
+                row.findElement(xpathLocator).click();
                 result = true;
+                break;
             }
         }
-        System.out.println("information submitted new page title "+driver.getTitle());
+        logger.info("information submitted new page title "+driver.getTitle());
+        return result;
+    }
+    public Boolean findSpecificContact(Contact contact){
+        boolean result = false;
+        By xpathLocator = By.xpath("//*[text()='"+contact.getFirstName()+" "+contact.getLastName()+"']");
+        wait.until(driver -> contactsTable.isDisplayed());
+        List<WebElement> rows = contactsTable.findElements(By.className("contactTableBodyRow"));
+        for(WebElement row : rows) {
+            if (row.findElement(xpathLocator).isDisplayed()){
+                return true;
+            }
+        }
+        logger.info("information submitted new page title "+driver.getTitle());
         return result;
     }
 }

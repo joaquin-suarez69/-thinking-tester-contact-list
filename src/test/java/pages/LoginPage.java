@@ -19,14 +19,14 @@ public class LoginPage extends BasePage {
 
     public void enterEmail(String email){
         emailField.sendKeys(email);
-        System.out.println("email entered "+email);
+        logger.info("email entered "+email);
     }
     public void enterPassword(String password){
         passwordField.sendKeys(password);
-        System.out.println("password entered "+password);
+        logger.info("password entered "+password);
     }
     public void submitLogin(){
         submitButton.click();
-        System.out.println("information submitted new page title "+driver.getTitle());
+        logger.info("information submitted new page title "+driver.getTitle());
     }
 }

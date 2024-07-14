@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class AddContactPage extends BasePage {
-    public AddContactPage(WebDriver driver) {
+public class EditContactPage extends BasePage {
+    public EditContactPage(WebDriver driver) {
         super(driver);
     }
     @FindBy(id = "firstName")
@@ -15,15 +15,21 @@ public class AddContactPage extends BasePage {
     @FindBy(id = "submit")
     private WebElement submitButton;
 
-    public void enterFirstName(String firstName){
+    public void enterNewFirstName(String firstName){
+        wait.until(driver -> firstNameField.isDisplayed());
+        firstNameField.clear();
+        wait.until(driver -> firstNameField.getText().isEmpty());
         firstNameField.sendKeys(firstName);
         logger.info("first name entered "+firstName);
     }
-    public void enterlastName(String lastName){
+    public void enterNewlastName(String lastName){
+        wait.until(driver -> firstNameField.isDisplayed());
+        lastNameField.clear();
+        wait.until(driver -> lastNameField.getText().isEmpty());
         lastNameField.sendKeys(lastName);
         logger.info("last name entered "+lastName);
     }
-    public void submitAddition(){
+    public void submitEdition(){
         submitButton.click();
         logger.info("information submitted new page title "+driver.getTitle());
     }
