@@ -8,7 +8,6 @@ import models.Contact;
 import models.User;
 import org.openqa.selenium.WebDriver;
 
-import java.util.List;
 
 public class ManageContacts {
     WebDriver driver = BaseTest.driver;
