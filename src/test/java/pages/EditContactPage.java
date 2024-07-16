@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class EditContactPage extends BasePage {
     public EditContactPage(WebDriver driver) {
@@ -16,7 +17,7 @@ public class EditContactPage extends BasePage {
     private WebElement submitButton;
 
     public void enterNewFirstName(String firstName){
-        wait.until(driver -> firstNameField.isDisplayed());
+        wait.until(ExpectedConditions.attributeToBeNotEmpty(firstNameField,"value"));
         firstNameField.clear();
         wait.until(driver -> firstNameField.getText().isEmpty());
         firstNameField.sendKeys(firstName);

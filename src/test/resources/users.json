@@ -1,0 +1,41 @@
+[
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "dateOfBirth": "1990-01-01",
+    "email": "john.doe@example.com",
+    "phone": "1234567890",
+    "addressOne": "123 Main Street",
+    "addressTwo": "Apt. B",
+    "city": "Anytown",
+    "state": "CA",
+    "postalCode": "12345",
+    "country": "USA"
+  },
+  {
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "dateOfBirth": "1995-07-15",
+    "email": "jane.smith@example.com",
+    "phone": "9876543210",
+    "addressOne": "456 Elm Street",
+    "addressTwo": "",
+    "city": "Metropolis",
+    "state": "NY",
+    "postalCode": "54321",
+    "country": "Canada"
+  },
+  {
+    "firstName": "Jonas",
+    "lastName": "Darius",
+    "dateOfBirth": "",
+    "email": "",
+    "phone": "",
+    "addressOne": "",
+    "addressTwo": "",
+    "city": "",
+    "state": "",
+    "postalCode": "",
+    "country": ""
+  }
+]

@@ -1,13 +1,23 @@
 package models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 @Builder
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class Contact {
-    String firstName;
-    String lastName;
+    @NonNull
+    private String firstName;
+    @NonNull
+    private String lastName;
+    private String dateOfBirth;
+    private String email;
+    private String phone;
+    private String addressOne;
+    private String addressTwo;
+    private String city;
+    private String state;
+    private String postalCode;
+    private String country;
 }

@@ -14,18 +14,11 @@ public class ContactDetailsPage extends BasePage {
     private WebElement lastNameField;
     @FindBy(id = "edit-contact")
     private WebElement editContactButton;
-
     @FindBy(id = "return")
     private WebElement returnToListButton;
+    @FindBy(id = "delete")
+    private WebElement deleteContactButton;
 
-    public void enterFirstName(String firstName){
-        firstNameField.sendKeys(firstName);
-        logger.info("first name entered "+firstName);
-    }
-    public void enterlastName(String lastName){
-        lastNameField.sendKeys(lastName);
-        logger.info("last name entered "+lastName);
-    }
     public void clickOnEditContact(){
         editContactButton.click();
         logger.info("Edit contact clicked "+driver.getTitle());
@@ -34,5 +27,14 @@ public class ContactDetailsPage extends BasePage {
     public void clickOnReturnToListButton(){
         wait.until(driver -> returnToListButton.isDisplayed());
         returnToListButton.click();
+    }
+    public void clickOnDeleteContact(){
+        wait.until(driver -> deleteContactButton.isDisplayed());
+        deleteContactButton.click();
+        acceptAlert();
+    }
+    private void acceptAlert(){
+        wait.until(driver -> driver.switchTo().alert());
+        driver.switchTo().alert().accept();
     }
 }
