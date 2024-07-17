@@ -9,12 +9,12 @@
 <p>
 El proyecto consta de un archivo feature con 3 posibles escenarios para Agregar, Actualizar y Eliminar un contacto de la lista para un usuario determinado. La cuenta de usuario debe ser creada manualmente con el boton de sign up. 
 
-Los datos del nuevo usuario deben ser agregados al archivo config.properties del proyecto en las propiedades
+Los datos del nuevo usuario deben ser agregados al archivo config.properties del proyecto en las propiedades para que sean utilizados por el framework.
 ```
 user.email
 user.password
 ```
-para que sean utilizados por el framework. En el archivo properties tambien podemos cambiar la URL base y el navegador en el que vamos a ejecutar las pruebas (actualmente Chrome y Firefox) cambiando los valores del campo
+ En el archivo properties tambien podemos cambiar la URL base y el navegador en el que vamos a ejecutar las pruebas (actualmente Chrome y Firefox) cambiando los valores del campo
 ```
 base.url
 base.browser
@@ -23,6 +23,10 @@ base.browser
 <h2>🛠️ Instalación </h2>
 <p>
 <p>1. Clona este repositorio a tu máquina local.</p>
+
+```
+git clone https://github.com/joaquin-suarez69/thinking-tester-contact-list.git
+```
 
 <p>2. Abre una terminal y navega hasta el directorio raiz del proyecto.</p>
 
