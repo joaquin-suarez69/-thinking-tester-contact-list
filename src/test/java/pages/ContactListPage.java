@@ -28,14 +28,19 @@ public class ContactListPage extends BasePage {
         By xpathLocator = By.xpath("//*[text()='"+firstName+" "+lastName+"']");
         wait.until(driver -> contactsTable.isDisplayed());
         List<WebElement> rows = contactsTable.findElements(By.className("contactTableBodyRow"));
-        for(WebElement row : rows) {
-            if (row.findElement(xpathLocator).isDisplayed()){
-                row.findElement(xpathLocator).click();
-                result = true;
-                break;
-            }
+        try{
+            for(WebElement row : rows) {
+                if (row.findElement(xpathLocator).isDisplayed()){
+                    row.findElement(xpathLocator).click();
+                    result = true;
+                    break;
+                }
+                }
+            logger.info("information submitted new page title "+driver.getTitle());
+        } catch (NoSuchElementException e){
+            logger.error("Contact not found in the list");
+            e.printStackTrace();
         }
-        logger.info("information submitted new page title "+driver.getTitle());
         return result;
     }
     public Boolean findSpecificContact(Contact contact){

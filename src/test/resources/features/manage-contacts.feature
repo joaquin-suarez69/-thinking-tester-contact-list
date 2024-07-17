@@ -2,7 +2,7 @@ Feature: Manage Contacts
   Verify if user is able to Login and manage his contacts
 
   Background:
-    Given user "admin" logs in the system
+    Given user logs in the system
 
   @CreateContact
   Scenario: Create a contact
