@@ -1,7 +1,7 @@
 <h1 align="center" id="title">Thinking tester contact list</h1>
 <p>
 
-<p id="description">Este proyecto Java utiliza Maven y Serenity para realizar pruebas automatizadas y generar reportes detallados de ejecución.</p>
+<p id="description">Este proyecto Java utiliza Maven, Serenity y Cucumber para realizar pruebas automatizadas y generar reportes detallados de ejecución.</p>
 <p>
 <p>
 <h2>🧐 Características </h2>
@@ -19,6 +19,19 @@ user.password
 base.url
 base.browser
 ```
+Los datos de los contactos se almacenan en un archivo JSON llamado <code> users.json </code> son cargados al ejecutar las pruebas de manage contacts y pueden adicionarse a gusto siguiendo el mismo formato del objeto.
+Para probar distintas combinaciones de usuarios en los tests se pueden modificar los indices de cada paso por ejemplo en el escenario de crear un contacto 
+```
+Background:
+    Given user logs in the system
+
+  @CreateContact
+Scenario: Create a contact
+
+    When user tries to "create" contact 1
+    Then contact 1 is present on the contacts list
+```
+el numero <strong>1</strong> indica que se va a usar el primer contacto de la lista de usuarios. 
 <p>
 <h2>🛠️ Instalación </h2>
 <p>
