@@ -1,39 +1,53 @@
+<h1 align="center" id="title">Thinking tester contact list</h1>
+<p>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>README - thinking-tester-contact-list</title>
-</head>
-<body>
-    <h1>Thinking tester contact list</h1>
+<p id="description">Este proyecto Java utiliza Maven y Serenity para realizar pruebas automatizadas y generar reportes detallados de ejecución.</p>
+<p>
+<p>
+<h2>🧐 Características </h2>
+<p>
+<p>
+El proyecto consta de un archivo feature con 3 posibles escenarios para Agregar, Actualizar y Eliminar un contacto de la lista para un usuario determinado. La cuenta de usuario debe ser creada manualmente con el boton de sign up. 
 
-    <h2>Descripción</h2>
-    <p>Este proyecto Java utiliza Maven y Serenity para realizar pruebas automatizadas y generar reportes detallados de ejecución.</p>
-    
-    <h2>Requisitos</h2>
-    <ul>
-        <li>Java JDK (versión compatible con tu proyecto)</li>
-        <li>Maven</li>
-    </ul>
-    
-    <h2>Configuración</h2>
-    <p>Para ejecutar el proyecto y generar el reporte de Serenity, sigue estos pasos:</p>
-    <ol>
-        <li>Clona este repositorio a tu máquina local.</li>
-        <li>Abre una terminal y navega hasta el directorio raíz del proyecto.</li>
-        <li>Ejecuta el siguiente comando:</li>
-    </ol>
-    
-    <pre>mvn clean verify serenity:aggregate</pre>
-    
-    <h2>Reporte de Ejecución</h2>
-    <p>Una vez completada la ejecución, podrás encontrar el reporte de Serenity en el siguiente directorio:</p>
-    <pre>target/site/serenity/index.html</pre>
+Los datos del nuevo usuario deben ser agregados al archivo config.properties del proyecto en las propiedades
+```
+user.email
+user.password
+```
+para que sean utilizados por el framework. En el archivo properties tambien podemos cambiar la URL base y el navegador en el que vamos a ejecutar las pruebas (actualmente Chrome y Firefox) cambiando los valores del campo
+```
+base.url
+base.browser
+```
+<p>
+<h2>🛠️ Instalación </h2>
+<p>
+<p>1. Clona este repositorio a tu máquina local.</p>
 
-    
-    <hr>
-    <p align="center">Creado con ❤️ por tu equipo de desarrollo.</p>
-</body>
-</html>
+<p>2. Abre una terminal y navega hasta el directorio raiz del proyecto.</p>
+
+<p>3. Ejecuta el siguiente comando</p>
+
+```
+mvn clean verify serenity:aggregate
+```
+
+<p>4. Una vez completada la ejecución podrás encontrar el reporte de Serenity en el siguiente directorio:</p>
+
+```
+target/site/serenity/index.html
+```
+<p>  
+
+<h2>💻 Construido con</h2>
+
+Tecnologias usadas en el proyecto:
+
+*   Maven
+*   SerenityBDD
+*   Selenium
+*   Cucumber
+*   Java
+<p>  
+<h2> ©️ Autor</h2>
+<p> * <a href="https://github.com/joaquin-suarez69"> Joaquin Suarez </a> - SDET (Software Development Engineer in Test)
