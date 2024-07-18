@@ -1,12 +1,14 @@
 package pages;
 
 import models.Contact;
+import net.serenitybdd.annotations.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class AddContactPage extends BasePage {
-    public AddContactPage(WebDriver driver) {
+public class EditableFieldsContactPage extends BasePage {
+    public EditableFieldsContactPage(WebDriver driver) {
         super(driver);
     }
     @FindBy(id = "firstName")
@@ -34,14 +36,33 @@ public class AddContactPage extends BasePage {
     @FindBy(id = "submit")
     private WebElement submitButton;
 
+    @Step("Enter first name information")
     public void enterFirstName(String firstName){
         firstNameField.sendKeys(firstName);
         logger.info("information entered "+firstName);
     }
+    @Step("Enter last name information")
     public void enterlastName(String lastName){
         lastNameField.sendKeys(lastName);
         logger.info("information entered "+lastName);
     }
+    @Step("Enter new first name")
+    public void enterNewFirstName(String firstName){
+        wait.until(ExpectedConditions.attributeToBeNotEmpty(firstNameField,"value"));
+        firstNameField.clear();
+        wait.until(driver -> firstNameField.getText().isEmpty());
+        firstNameField.sendKeys(firstName);
+        logger.info("first name entered "+firstName);
+    }
+    @Step("Enter new last name")
+    public void enterNewlastName(String lastName){
+        wait.until(driver -> firstNameField.isDisplayed());
+        lastNameField.clear();
+        wait.until(driver -> lastNameField.getText().isEmpty());
+        lastNameField.sendKeys(lastName);
+        logger.info("last name entered "+lastName);
+    }
+    @Step("Enter optional information")
     public void enterOptionalContactInformation(Contact contact){
         birthDateField.sendKeys(contact.getDateOfBirth());
         emailField.sendKeys(contact.getEmail());
@@ -54,7 +75,8 @@ public class AddContactPage extends BasePage {
         countryField.sendKeys(contact.getCountry());
         logger.info("optional contact information entered");
     }
-    public void submitAddition(){
+    @Step("Submit data")
+    public void clickOnSubmit(){
         submitButton.click();
         logger.info("information submitted new page title "+driver.getTitle());
     }

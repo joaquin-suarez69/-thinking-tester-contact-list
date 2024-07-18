@@ -7,17 +7,20 @@ Feature: Manage Contacts
   @CreateContact
   Scenario: Create a contact
 
-    When user tries to "create" contact 1
-    Then contact 1 is present on the contacts list
+    When user "creates" contact 3
+    Then contact 3 is present on the contacts list
+    And user logs out of the system
 
     @UpdateContact
     Scenario: Update a contact
 
-      When user tries to update contact 1 with contact 2 information
-      Then contact 1 has contact 2 information
+      When user updates contact 3 with contact 2 information
+      Then contact 3 has contact 2 information
+      And user logs out of the system
 
     @DeleteContact
     Scenario: Delete a contact
 
-      When user tries to "delete" contact 1
-      Then contact 1 is not present on the contacts list
+      When user "deletes" contact 2
+      Then contact 2 is not present on the contacts list
+      And user logs out of the system
