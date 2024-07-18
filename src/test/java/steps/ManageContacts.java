@@ -8,20 +8,22 @@ import lombok.extern.slf4j.Slf4j;
 import models.Contact;
 import net.serenitybdd.annotations.Steps;
 
+import java.io.IOException;
+
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.*;
-import static steps.BaseTest.contacts;
-import static steps.BaseTest.homePageTitle;
+import static steps.BaseTest.*;
 
 
 @Slf4j
 public class ManageContacts {
     @Steps
-    StepDefinition stepDefinition = new StepDefinition();
+    StepDefinition stepDefinition;
     @Given("user logs in the system")
-    public void user_logs_in_the_system(){
-        log.info("User email "+BaseTest.user.getEmail());
-        stepDefinition.login(BaseTest.user);
+    public void user_logs_in_the_system() throws IOException {
+        BaseTest.loadContacts();
+        log.info("User email {}",user.getEmail());
+        stepDefinition.login(user);
     }
 
     @When("user {string} contact {int}")
@@ -54,7 +56,8 @@ public class ManageContacts {
     }
 
     @Then("contact {int} has contact {int} information")
-    public void updated_contact_present_on_list(int newIndex){
+    public void updated_contact_present_on_list(int index, int newIndex){
+        log.info("Contact to modify {} {}",contacts.get(index-1).getFirstName(),contacts.get(index-1).getLastName());
         assertTrue(stepDefinition.validateContactInList(contacts.get(newIndex-1)),"Updated information is not on the list");
     }
     @Then("contact {int} is not present on the contacts list")

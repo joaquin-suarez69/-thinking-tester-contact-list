@@ -36,7 +36,6 @@ public class BaseTest {
     public void setup(){
         try {
             loadProperties();
-            loadContacts();
         } catch (IOException e){
             log.error("Error reading files");
             throw new RuntimeException(e);
@@ -68,7 +67,7 @@ public class BaseTest {
         browser = prop.getProperty("base.browser");
         homePageTitle = prop.getProperty("base.homepage.title");
     }
-    private void loadContacts() throws IOException {
+    protected static void loadContacts() throws IOException {
         String filePath = "src/test/resources/users.json";
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         StringBuilder jsonString = new StringBuilder();

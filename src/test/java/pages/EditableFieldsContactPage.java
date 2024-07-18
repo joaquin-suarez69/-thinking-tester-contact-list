@@ -42,7 +42,7 @@ public class EditableFieldsContactPage extends BasePage {
         logger.info("information entered "+firstName);
     }
     @Step("Enter last name information")
-    public void enterlastName(String lastName){
+    public void enterLastName(String lastName){
         lastNameField.sendKeys(lastName);
         logger.info("information entered "+lastName);
     }

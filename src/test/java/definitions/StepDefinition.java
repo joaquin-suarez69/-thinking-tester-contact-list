@@ -34,7 +34,7 @@ public class StepDefinition extends BaseTest {
     public void addContact(Contact contact){
         contactListPage.clickOnAddContact();
         editableFieldsContactPage.enterFirstName(contact.getFirstName());
-        editableFieldsContactPage.enterlastName(contact.getLastName());
+        editableFieldsContactPage.enterLastName(contact.getLastName());
         editableFieldsContactPage.enterOptionalContactInformation(contact);
         editableFieldsContactPage.clickOnSubmit();
     }

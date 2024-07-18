@@ -1,5 +1,5 @@
 Feature: Manage Contacts
-  Verify if user is able to Login and manage his contacts
+  As an user I should be able to create, update and delete contacts in my agenda
 
   Background:
     Given user logs in the system
