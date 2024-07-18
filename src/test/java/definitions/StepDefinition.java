@@ -1,19 +1,28 @@
 package definitions;
 
 
-
+import lombok.extern.slf4j.Slf4j;
 import models.Contact;
 import models.User;
 import net.serenitybdd.annotations.Step;
-import pages.*;
+import net.serenitybdd.annotations.Steps;
+import pages.ContactDetailsPage;
+import pages.ContactListPage;
+import pages.EditableFieldsContactPage;
+import pages.LoginPage;
 import steps.BaseTest;
 
+@Slf4j
 public class StepDefinition extends BaseTest {
+    @Steps
     LoginPage loginPage = new LoginPage(super.getDriver());
+    @Steps
     ContactListPage contactListPage = new ContactListPage(super.getDriver());
-    AddContactPage addContactPage = new AddContactPage(super.getDriver());
+    @Steps
+    EditableFieldsContactPage editableFieldsContactPage = new EditableFieldsContactPage(super.getDriver());
+    @Steps
     ContactDetailsPage contactDetailsPage = new ContactDetailsPage(super.getDriver());
-    EditContactPage editContactPage = new EditContactPage(super.getDriver());
+
     @Step("User logs on the system")
     public void login(User user){
         loginPage.enterEmail(user.getEmail());
@@ -24,59 +33,46 @@ public class StepDefinition extends BaseTest {
     @Step("User adds a contact")
     public void addContact(Contact contact){
         contactListPage.clickOnAddContact();
-        addContactPage.enterFirstName(contact.getFirstName());
-        addContactPage.enterlastName(contact.getLastName());
-        addContactPage.enterOptionalContactInformation(contact);
-        addContactPage.submitAddition();
+        editableFieldsContactPage.enterFirstName(contact.getFirstName());
+        editableFieldsContactPage.enterLastName(contact.getLastName());
+        editableFieldsContactPage.enterOptionalContactInformation(contact);
+        editableFieldsContactPage.clickOnSubmit();
     }
-    @Step("User searchs a contact by name")
-    public Boolean searchContactByName(Contact contact){
-        return contactListPage.findSpecificContact(contact.getFirstName(), contact.getLastName());
+    @Step("User searches a contact by name")
+    public Boolean searchContactAndClick(Contact contact, Boolean click){
+        return contactListPage.findSpecificContact(contact, click);
     }
     @Step("User updates a contact information")
     public void updateContact(Contact oldContact, Contact newContact){
-        if(searchContactByName(oldContact)){
+        if(searchContactAndClick(oldContact, true)){
             contactDetailsPage.clickOnEditContact();
-            editContactPage.enterNewFirstName(newContact.getFirstName());
-            editContactPage.enterNewlastName(newContact.getLastName());
-            editContactPage.submitEdition();
+            editableFieldsContactPage.enterNewFirstName(newContact.getFirstName());
+            editableFieldsContactPage.enterNewlastName(newContact.getLastName());
+            editableFieldsContactPage.enterOptionalContactInformation(newContact);
+            editableFieldsContactPage.clickOnSubmit();
             contactDetailsPage.clickOnReturnToListButton();
         } else {
-            logger.error("Contact not found");
+            log.error("Contact not found");
         }
     }
     @Step("User deletes a contact")
-    public void deleteContact(Contact contact){
-        if(searchContactByName(contact)){
+    public Boolean deleteContact(Contact contact){
+        if(searchContactAndClick(contact, true)){
             contactDetailsPage.clickOnDeleteContact();
+            return true;
         } else {
-            logger.error("Contact not found");
+            log.error("Contact not found");
+            return false;
         }
     }
-    @Step("User validates if new contact is on the list")
-    public Boolean validateNewContactInList(Contact contact){
-        return contactListPage.findSpecificContact(contact);
+    @Step("User validates if contact is on the list")
+    public Boolean validateContactInList(Contact contact){
+        return contactListPage.findSpecificContact(contact, false);
     }
+    @Step("User logs off the system")
+    public String userLogsOff(){
+        contactListPage.clickOnLogoutButton();
+        return loginPage.waitForHomePageToLoad();
 
-    public Contact createContact(String firstName, String lastName){
-        return Contact.builder()
-                .firstName(firstName)
-                .lastName(lastName)
-                .build();
-    }
-    public Contact createContact(String firstName, String lastName, String dateOfBirth, String email, String phone, String addressOne, String addressTwo, String city, String state, String postalCode, String country){
-        return Contact.builder()
-                .firstName(firstName)
-                .lastName(lastName)
-                .dateOfBirth(dateOfBirth)
-                .email(email)
-                .phone(phone)
-                .addressOne(addressOne)
-                .addressTwo(addressTwo)
-                .city(city)
-                .state(state)
-                .postalCode(postalCode)
-                .country(country)
-                .build();
     }
 }

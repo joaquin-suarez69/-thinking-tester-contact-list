@@ -5,41 +5,40 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import lombok.extern.slf4j.Slf4j;
 import models.Contact;
 import models.User;
 import org.openqa.selenium.WebDriver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+
+@Slf4j
 public class BaseTest {
 
-    protected static Logger logger = LoggerFactory.getLogger(BaseTest.class);
-    static String baseURL = "";
+    String baseURL = "";
     static WebDriver driver;
-    static Properties prop = new Properties();
-    //browsers: "chrome","firefox"
-    static String browser = "";
+    Properties prop = new Properties();
+    String browser = "";
+    static String homePageTitle = "";
     static User user = User.getInstance();
     static List<Contact> contacts = new ArrayList<>();
 
     @Before
-    public static void setup(){
-        try (InputStream input = new FileInputStream("src/test/resources/config.properties")) {
-            prop.load(input);
-            logger.info("using account: "+prop.getProperty("user.email"));
-            user.setEmail(prop.getProperty("user.email"));
-            user.setPassword(prop.getProperty("user.password"));
-            baseURL = prop.getProperty("base.url");
-            browser = prop.getProperty("base.browser");
-            loadContacts();
-        } catch (IOException ex) {
-            logger.error("setup failed to read files");
-            ex.printStackTrace();
+    public void setup(){
+        try {
+            loadProperties();
+        } catch (IOException e){
+            log.error("Error reading files");
+            throw new RuntimeException(e);
         }
         switch (browser){
             case "chrome":
@@ -56,10 +55,19 @@ public class BaseTest {
     }
     @After
     public void teardown() {
-        //driver.close();
         driver.quit();
     }
-    private static void loadContacts() throws IOException {
+    private void loadProperties() throws IOException {
+        InputStream input = Files.newInputStream(Paths.get("src/test/resources/config.properties"));
+        prop.load(input);
+        log.info("using account: "+prop.getProperty("user.email"));
+        user.setEmail(prop.getProperty("user.email"));
+        user.setPassword(prop.getProperty("user.password"));
+        baseURL = prop.getProperty("base.url");
+        browser = prop.getProperty("base.browser");
+        homePageTitle = prop.getProperty("base.homepage.title");
+    }
+    protected static void loadContacts() throws IOException {
         String filePath = "src/test/resources/users.json";
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         StringBuilder jsonString = new StringBuilder();
